@@ -49,4 +49,4 @@ local function spawnPlayer(coords)
 	SetMaxWantedLevel(0)
 end
 
-RegisterNetEvent("atl:client:spawnPlayer", spawnPlayer)
+RegisterNetEvent("adame:client:spawnPlayer", spawnPlayer)
