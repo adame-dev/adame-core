@@ -34,3 +34,5 @@ client_scripts({
 
 	"config/client.lua",
 })
+
+provide("core")
