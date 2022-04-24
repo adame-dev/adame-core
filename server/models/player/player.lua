@@ -8,7 +8,22 @@ player.__index = player
 
 -- Creates player metadata
 
-Adame.SetData = function(source, identifier, name, jobs, group, accounts, inventory, status, appearance, char_data)
+Adame.SetData = function(
+	source,
+	identifier,
+	name,
+	jobs,
+	group,
+	accounts,
+	inventory,
+	status,
+	appearance,
+	char_data,
+	char_name,
+	char_sex,
+	char_date,
+	char_height
+)
 	local self = {}
 	self.source = source
 	self.identifier = identifier
@@ -20,6 +35,10 @@ Adame.SetData = function(source, identifier, name, jobs, group, accounts, invent
 	self.status = status
 	self.appearance = appearance
 	self.char_data = char_data
+	self.char_name = char_name
+	self.char_sex = char_sex
+	self.char_date = char_date
+	self.char_height = char_height
 
 	Adame.Players[self.source] = self
 	return setmetatable(self, getmetatable(Adame.Players))
@@ -37,8 +56,8 @@ end
 
 function player:getCharacterName()
 	return {
-		self.char_data.firstname,
-		self.char_data.lastname,
+		self.char_name.firstname,
+		self.char_name.lastname,
 	}
 end
 
@@ -57,7 +76,7 @@ function player:savePlayer()
 
 	Adame.Database.updateOne(true, "users", { license = self.identifier }, {
 		["$set"] = {
-			accounts = encode(self.Accounts),
+			accounts = encode(self.accounts),
 			appearance = encode(self.appearance),
 			status = encode(self.status),
 			inventory = encode(self.inventory),
