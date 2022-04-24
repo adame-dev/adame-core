@@ -25,8 +25,28 @@ Adame.SetData = function(source, identifier, name, jobs, group, accounts, invent
 	return setmetatable(self, getmetatable(Adame.Players))
 end
 
+-- @Getters
+
 function player:getSource()
 	return self.source
+end
+
+function player:getName()
+	return self.name
+end
+
+function player:getCharacterName()
+	return {
+		self.char_data.firstname,
+		self.char_data.lastname,
+	}
+end
+
+function player:hasPermission(group)
+	if not Server.Groups[group] then
+		return false
+	end
+	return Server.Groups[self.group] >= Server.Groups[group]
 end
 
 function player:savePlayer()
@@ -57,6 +77,8 @@ function player:getIdentifier(identifier)
 	end
 	return "No matching identifier: " .. tostring(matchingIdentifier)
 end
+
+-- @Setters
 
 function player:setGroup(group)
 	if not group then
