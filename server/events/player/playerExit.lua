@@ -4,6 +4,7 @@ function playerExit()
 	if player then
 		player:savePlayer()
 		Adame.Players[playerId] = nil
+		print("[Adame] Player " .. playerId .. " disconnected.")
 	end
 	DropPlayer(playerId, "[Adame] Left the server")
 end
