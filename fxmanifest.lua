@@ -9,13 +9,15 @@ author("Adame Developing")
 server_scripts({
 	"server/main.lua",
 	"server/loops.lua",
-	"server/models/player.lua",
+
+	"server/models/player/player.lua",
+	"server/models/player/functions/createUser.lua",
 
 	"server/functions/functions.lua",
+	"server/functions/player/createUser.lua",
 
-	"server/functions/events/player/createPlayer.lua",
+	"server/events/player/createPlayer.lua",
 
-	
 	"server/functions/database/database.lua",
 
 	"server/commands/car.lua",

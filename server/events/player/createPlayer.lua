@@ -34,9 +34,11 @@ end
 
 local function createPlayer()
 	local player = source
+	local name = GetPlayerName(player)
+
 	Adame.GetLicense(player, function(license)
 		if license then
-			Adame.CreateUser(player, license, playerExist(license), playerData(license))
+			Adame.CreateUser(player, license, name, playerExist(license), playerData(license))
 		else
 			DropPlayer(player, "[Adame] License not found")
 		end

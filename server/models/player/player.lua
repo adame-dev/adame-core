@@ -8,10 +8,11 @@ player.__index = player
 
 -- Creates player metadata
 
-Adame.SetData = function(source, identifier, jobs, group, accounts, inventory, status, appearance, char_data)
+Adame.SetData = function(source, identifier, name, jobs, group, accounts, inventory, status, appearance, char_data)
 	local self = {}
 	self.source = source
 	self.identifier = identifier
+	self.name = name
 	self.jobs = jobs
 	self.group = group
 	self.accounts = accounts
