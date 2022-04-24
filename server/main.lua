@@ -1,1 +1,3 @@
-Adame = {}
+Adame = {
+	Commands = {},
+}
