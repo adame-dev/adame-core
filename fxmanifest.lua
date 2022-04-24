@@ -20,8 +20,7 @@ server_scripts({
 
 	"server/functions/database/database.lua",
 
-	"server/commands/car.lua",
-	"server/commands/setgroup.lua",
+	"server/commands/commands.lua",
 
 	"config/server.lua",
 })
@@ -31,6 +30,7 @@ client_scripts({
 	"client/loops.lua",
 
 	"client/events/spawnPlayer.lua",
+	"client/events/vehicle.lua",
 
 	"config/client.lua",
 })

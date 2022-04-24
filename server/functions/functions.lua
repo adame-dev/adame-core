@@ -38,6 +38,10 @@ Adame.GetPlayer = function(id)
 end
 
 Adame.RegisterCommand = function(name, description, group, cb, suggestions, rcon)
+	if Adame.Commands[name] then
+		error("Command " .. name .. " already exists.")
+	end
+
 	RegisterCommand(name, function(source, args, rawCommand)
 		local src = source
 		if rcon then
@@ -51,6 +55,35 @@ Adame.RegisterCommand = function(name, description, group, cb, suggestions, rcon
 			end
 		end
 	end)
+
+	Adame.Commands[name] = {
+		description = description,
+		group = group,
+		suggestions = suggestions or {},
+	}
+end
+
+Adame.RefreshCommands = function(playerId)
+	local player = Adame.Players[playerId]
+	if not player then
+		return false
+	end
+
+	local suggestions = {}
+	for name, command in pairs(Adame.Commands) do
+		local commandName = "/" .. name
+		if player:hasPermission(command.group) then
+			suggestions[#suggestions + 1] = {
+				name = commandName,
+				help = command.description,
+				params = command.suggestions,
+			}
+		else
+			TriggerClientEvent("chat:removeSuggestion", player.source, commandName)
+		end
+	end
+	TriggerClientEvent("chat:addSuggestions", player.source, suggestions)
+	return true
 end
 
 Adame.SpawnVehicle = function(model, coords, heading, cb)
