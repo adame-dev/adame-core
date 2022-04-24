@@ -12,13 +12,15 @@ server_scripts({
 
 	"server/models/player/player.lua",
 	"server/models/player/functions/createUser.lua",
+	"server/models/player/functions/deleteUser.lua",
+	"server/models/player/functions/createCharacter.lua",
 
 	"server/functions/functions.lua",
-	"server/functions/player/createUser.lua",
+	"server/functions/database/database.lua",
 
 	"server/events/player/createPlayer.lua",
-
-	"server/functions/database/database.lua",
+	"server/events/player/playerExit.lua",
+	"server/events/player/playerJoined.lua",
 
 	"server/commands/commands.lua",
 
