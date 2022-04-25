@@ -15,7 +15,7 @@ Adame.CreateUser = function(src, license, name, exists, data)
 			identity = encode({}),
 			job_data = encode({}),
 			char_data = encode({ coords = Server.Spawn.coords }),
-			char_name = encode({}),
+			char_name = "",
 			char_sex = "m",
 			char_date = "01/01/1999",
 			char_height = 170,
@@ -34,7 +34,7 @@ Adame.CreateUser = function(src, license, name, exists, data)
 			Server.Status,
 			{},
 			Server.Spawn.coords,
-			{},
+			"",
 			"m",
 			"01/01/1999",
 			170

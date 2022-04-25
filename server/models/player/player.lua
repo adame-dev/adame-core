@@ -106,6 +106,13 @@ function player:setGroup(group)
 	self.group = group
 end
 
+function player:updateCharacter(char_data)
+	self.char_name = char_data.char_name
+	self.char_sex = char_data.char_sex
+	self.char_date = char_data.char_date
+	self.char_height = char_data.char_height
+end
+
 function player:updateCoords(coords, now)
 	if type(coords) ~= "vector4" then
 		return false
