@@ -28,31 +28,14 @@ end, {
 	{ name = "dist", help = "Distance to remove (default: 1.0)" },
 }, false)
 
-Adame.RegisterCommand("register", "Spawn a vehicle", "user", function(source, args, playerData)
+Adame.RegisterCommand("register", "Register a new character", "user", function(source, args, playerData)
 	local data
 
 	Adame.Database.findOne(true, "users", { license = license }, function(success, result)
 		if #result > 0 then
-			print(result[1].char_name.firstname)
 			if type(result[1].char_name) ~= "table" then
-				data = {
-					firstname = "",
-					lastname = "",
-					dateofbirth = "",
-					sex = "",
-					height = "",
-				}
 				TriggerClientEvent("adame-identity:showRegisterIdentity", source)
-				print("asd")
 			else
-				data = {
-					license = result[1].license,
-					firstname = result[1].char_name.firstname,
-					lastname = result[1].char_name.lastname,
-					dateofbirth = result[1].char_date,
-					sex = result[1].char_sex,
-					height = result[1].char_height,
-				}
 				print("Already registered.")
 			end
 		else
