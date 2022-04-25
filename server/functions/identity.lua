@@ -20,16 +20,11 @@ RegisterServerEvent("adame-identity:setIdentity")
 AddEventHandler("adame-identity:setIdentity", function(data)
 	local player = Adame.Players[source]
 	local license = Adame.GetLicense(player)
-	local id = {
-		license = Adame.GetLicense(playerId),
-		playerid = playerId,
-	}
 
 	Adame.setIdentity(license, data)
 
-	TriggerClientEvent("adame-identity:identityCheck", id.playerid, true)
+	TriggerClientEvent("adame-identity:identityCheck", player, true)
 	TriggerEvent("adame-identity:characterUpdated", player, data)
-    
 end)
 
 AddEventHandler("adame-identity:characterUpdated", function(playerId, data)
