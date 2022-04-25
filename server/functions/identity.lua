@@ -5,7 +5,7 @@ Adame.setIdentity = function(source, license, data, callback)
 end
 
 Adame.deleteIdentity = function(source, license)
-	local data2 = {
+	local data = {
 		firstname = nil,
 		lastname = nil,
 		dateofbirth = nil,
@@ -13,17 +13,21 @@ Adame.deleteIdentity = function(source, license)
 		height = nil,
 	}
 
-	Adame.CreateCharacter(source, license, data2)
+	Adame.CreateCharacter(source, license, data)
 end
 
 RegisterServerEvent("adame-identity:setIdentity")
 AddEventHandler("adame-identity:setIdentity", function(data)
 	local player = Adame.Players[source]
 	local license = Adame.GetLicense(player)
+	local id = {
+		license = Adame.GetLicense(playerId),
+		playerid = playerId,
+	}
 
 	Adame.setIdentity(license, data)
 
-	TriggerClientEvent("adame-identity:identityCheck", myIdentifiers.playerid, true)
+	TriggerClientEvent("adame-identity:identityCheck", id.playerid, true)
 	TriggerEvent("adame-identity:characterUpdated", player, data)
     
 end)

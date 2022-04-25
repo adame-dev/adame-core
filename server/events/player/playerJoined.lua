@@ -7,12 +7,12 @@ function playerJoined(playerId)
 
 	local license = Adame.GetLicense(playerId)
 
-	local myID = {
+	local id = {
 		license = Adame.GetLicense(playerId),
 		playerid = playerId,
 	}
 
-	TriggerClientEvent("adame-identity:saveID", playerId, myID)
+	TriggerClientEvent("adame-identity:saveID", playerId, id)
 
 	Adame.Database.findOne(true, "users", { license = license }, function(success, result)
 		if #result > 0 then
