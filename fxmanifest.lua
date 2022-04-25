@@ -16,6 +16,7 @@ server_scripts({
 	"server/models/player/functions/createCharacter.lua",
 
 	"server/functions/functions.lua",
+	"server/functions/identity.lua",
 	"server/functions/database/database.lua",
 
 	"server/events/player/createPlayer.lua",

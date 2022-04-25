@@ -107,6 +107,8 @@ function player:setGroup(group)
 end
 
 function player:updateCharacter(char_data)
+	if not char_data then return end
+	 
 	self.char_name = char_data.char_name
 	self.char_sex = char_data.char_sex
 	self.char_date = char_data.char_date
