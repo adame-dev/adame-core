@@ -40,7 +40,7 @@ local function createPlayer()
     if license then
       TriggerEvent('adame:server:createUser', player, license, name, playerExist(license), playerData(license))
     else
-      DropPlayer(player, '[Adame] License not found')
+      DropPlayer(player, '[adame-core] License not found')
     end
   end)
 end
@@ -52,10 +52,10 @@ function playerJoined(playerId)
   local name = player:getName()
 
   if player then
-    return DropPlayer(playerId, '[Adame] Player with same identifier is already logged in.')
+    return DropPlayer(playerId, '[adame-core] Player with same identifier is already logged in.')
   end
 
-  print('[Adame] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' connected.')
+  print('[adame-core] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' connected.')
   -- TODO: Create discord log when user connect
 
   -- Start identity menu
@@ -70,7 +70,7 @@ function playerExit()
   if player then
     player:savePlayer()
     Adame.Players[playerId] = nil
-    print('[Adame] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' disconnected.')
+    print('[adame-core] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' disconnected.')
     -- TODO: Create discord log when user disconnect
   end
   DropPlayer(playerId, '[Adame] Left the server')
@@ -79,12 +79,12 @@ end
 AddEventHandler('playerConnecting', function(_, _, deferrals)
   deferrals.defer()
   local playerId = source
-  deferrals.update('[Adame] Checking player...')
+  deferrals.update('[adame-core] Checking player...')
 
   local license = Adame.GetLicense(playerId)
   Wait(500)
   if not license then
-    deferrals.done('[Adame] No license found.')
+    deferrals.done('[adame-core] No license found.')
     return CancelEvent()
   end
   deferrals.done()
