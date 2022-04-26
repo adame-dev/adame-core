@@ -1,62 +1,64 @@
 local encode = json.encode
 local decode = json.decode
 
-Adame.CreateUser = function(src, license, name, exists, data)
-	if not exists then
-		-- Si no existe
-		Adame.Database.insertOne(false, "users", {
-			license = license,
-			name = name,
-			accounts = encode(Server.Accounts),
-			appearance = encode({}),
-			group = Server.Groups[1] or "user",
-			status = encode(Server.Status),
-			inventory = encode({}),
-			identity = encode({}),
-			job_data = encode({}),
-			char_data = encode({ coords = Server.Spawn.coords }),
-			char_name = "",
-			char_sex = "m",
-			char_date = "01/01/1999",
-			char_height = 170,
-		})
+--- Creates new user
+--- @param src number - (player id)
+--- @param license string - (player license)
+--- @param name string - (player name)
+--- @param exists boolean - (if player exists)
+--- @param data table - (player data)
+local function createUser(src, license, name, exists, data)
+  if not exists then
+    Adame.Database.insertOne(false, 'users', {
+      license = license,
+      name = name,
+      accounts = encode(Server.Accounts),
+      appearance = encode({}),
+      group = Server.Groups[1] or 'user',
+      status = encode(Server.Status),
+      inventory = encode({}),
+      identity = encode({}),
+      job_data = encode({}),
+      char_data = encode({ coords = Server.Spawn.coords }),
+      char_name = '',
+      char_sex = 'm',
+      char_date = '01/01/1999',
+      char_height = 170,
+    })
 
-		print("[Adame] Created user: " .. license)
+    print('[Adame] Created user: ' .. license)
 
-		Adame.Players[src] = Adame.SetData(
-			src,
-			license,
-			name,
-			{},
-			Server.Groups[1] or "user",
-			Server.Accounts,
-			{},
-			Server.Status,
-			{},
-			Server.Spawn.coords,
-			"",
-			"m",
-			"01/01/1999",
-			170
-		)
-	else
-		-- Si existe
-		Adame.Players[src] = Adame.SetData(
-			src,
-			license,
-			name,
-			decode(data.job_data),
-			data.group,
-			decode(data.accounts),
-			decode(data.inventory),
-			decode(data.status),
-			decode(data.appearance),
-			decode(data.char_data),
-			decode(data.char_name),
-			data.char_sex,
-			data.char_date,
-			data.char_height
-		)
-		TriggerClientEvent("adame:client:spawnPlayer", src, decode(data.char_data).coords)
-	end
+    Adame.Players[src] = Adame.newPlayer(src, license, {
+      name = name,
+      jobs = {},
+      group = Server.Groups[1] or 'user',
+      accounts = Server.Accounts,
+      inventory = {},
+      status = Server.Status,
+      appearance = {},
+      char_data = Server.Spawn.coords,
+      char_name = '',
+      char_sex = 'm',
+      char_date = '01/01/1999',
+      char_height = 170,
+    })
+  else
+    Adame.Players[src] = Adame.newPlayer(src, license, {
+      name = name,
+      jobs = decode(data.job_data),
+      group = data.group,
+      accounts = decode(data.accounts),
+      inventory = decode(data.inventory),
+      status = decode(data.status),
+      appearance = decode(data.appearance),
+      char_data = decode(data.char_data),
+      char_name = decode(data.char_name),
+      char_sex = data.char_sex,
+      char_date = data.char_date,
+      char_height = data.char_height,
+    })
+    TriggerClientEvent('adame:client:spawnPlayer', src, decode(data.char_data).coords)
+  end
 end
+
+RegisterNetEvent('adame:server:createUser', createUser)
