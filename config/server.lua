@@ -16,7 +16,7 @@ Server = {
 		["owner"] = 3,
 	},
 	Spawn = {
-		coords = vector3(-802.00, 175.00, 72.95),
+		coords = vector3(-269.1, -956.22, 31.22),
 	},
-	SaveTime = 2000, -- 2 seconds
+	SaveTime = 10000, -- 10 seconds
 }

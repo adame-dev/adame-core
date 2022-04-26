@@ -1,33 +1,12 @@
 function playerJoined(playerId)
 	local playerId = source or playerId
-
 	if Adame.Players[playerId] then
 		return DropPlayer(playerId, "[Adame] Player with same identifier is already logged in.")
 	end
 
 	local license = Adame.GetLicense(playerId)
 
-	local id = {
-		license = Adame.GetLicense(playerId),
-		playerid = playerId,
-	}
-
-	TriggerClientEvent("adame-identity:saveID", playerId, id)
-
-	Adame.Database.findOne(true, "users", { license = license }, function(success, result)
-		if #result > 0 then
-			if type(result[1].char_name) ~= "table" then
-				TriggerClientEvent("adame-identity:identityCheck", playerId, false)
-				TriggerClientEvent("adame-identity:showRegisterIdentity", playerId)
-			else
-				TriggerClientEvent("adame-identity:identityCheck", playerId, true)
-				TriggerEvent("adame-identity:characterUpdated", playerId, data)
-				print("Already registered asdasd.")
-			end
-		else
-			print("No user.")
-		end
-	end)
+	-- Start identity menu
 end
 
 AddEventHandler("playerConnecting", function(_, _, deferrals)
