@@ -2,6 +2,7 @@ local player = {}
 setmetatable(Adame.Players, player)
 
 local encode = json.encode
+local decode = json.decode
 
 player.__index = player
 
@@ -29,7 +30,6 @@ Adame.newPlayer = function(playerId, identifier, data)
   self.char_date = data.char_date
   self.char_height = data.char_height
 
-  -- Load
   SetEntityCoords(GetPlayerPed(playerId), self.char_data.coords.x, self.char_data.coords.y, self.char_data.coords.z)
   SetEntityHeading(GetPlayerPed(playerId), self.char_data.coords.w)
 
@@ -52,6 +52,7 @@ function player:savePlayer()
       inventory = encode(self.inventory),
       job_data = encode(self.jobs),
       char_data = encode(self.char_data),
+      group = self.group,
     },
   })
 end
@@ -91,6 +92,7 @@ end
 --- @return boolean - (true if set)
 function player:setGroup(group)
   if not Server.Groups[group] then
+    print('[adame-core] Group \'' .. group .. '\' doesn\'t exist')
     return false
   end
 

@@ -1,3 +1,42 @@
+function getIdentity(source, callback)
+  local player = Adame.GetPlayer(source)
+  local license = Adame.GetLicense(source)
+  local result
+  local char_data
+
+  Adame.Database.findOne(true, 'users', { license = license }, function(success, data)
+    if not success then
+      print('No user.')
+      return
+    end
+
+    if #data > 0 then
+      result = data[1]
+      if result.char_name ~= '' then
+        char_data = {
+          identifier = result[1].license,
+          firstname = result[1].char_name.firstname,
+          lastname = result[1].char_name.lastname,
+          dateofbirth = result[1].char_date,
+          sex = result[1].char_sex,
+          height = result[1].char_height,
+        }
+      else
+        char_data = {
+          identifier = '',
+          firstname = '',
+          lastname = '',
+          dateofbirth = '',
+          sex = '',
+          height = '',
+        }
+      end
+    end
+  end)
+
+  return char_data
+end
+
 local function playerExist(license)
   local result = false
 
@@ -49,7 +88,7 @@ function playerJoined(playerId)
   local playerId = source or playerId
   local player = Adame.Players[playerId]
   local license = Adame.GetLicense(playerId)
-  local name = player:getName()
+  local name = GetPlayerName(playerId)
 
   if player then
     return DropPlayer(playerId, '[adame-core] Player with same identifier is already logged in.')
@@ -58,7 +97,30 @@ function playerJoined(playerId)
   print('[adame-core] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' connected.')
   -- TODO: Create discord log when user connect
 
+  createPlayer()
+
   -- Start identity menu
+  local myID = {
+    steamid = license,
+    playerid = playerId,
+  }
+
+  TriggerClientEvent('adame-identity:saveID', playerId, myID)
+
+  local data = getIdentity(playerId)
+
+  print(data.firstname)
+  if data.firstname ~= '' then
+    TriggerClientEvent('adame-identity:identityCheck', playerId, true)
+    TriggerEvent('adame-identity:characterUpdated', playerId, data)
+
+    print('ab')
+  else
+    TriggerClientEvent('adame-identity:identityCheck', playerId, false)
+    TriggerEvent('adame-identity:characterUpdated', playerId, data)
+    TriggerClientEvent('adame-identity:showRegisterIdentity', playerId)
+    print('ba')
+  end
 end
 
 function playerExit()

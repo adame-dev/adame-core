@@ -17,6 +17,7 @@ server_scripts({
 
   'server/functions/functions.lua',
   'server/functions/database/database.lua',
+  'server/functions/callbacks.lua',
 
   'server/events/player.lua',
 
@@ -30,8 +31,11 @@ client_scripts({
   'client/main.lua',
   'client/loops.lua',
 
+  'client/identity/main.lua',
   'client/events/spawnPlayer.lua',
   'client/events/vehicle.lua',
+
+  'client/functions/callbacks.lua',
 
   'client/export.lua',
 

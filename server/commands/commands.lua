@@ -1,67 +1,45 @@
-Adame.RegisterCommand("car", "Spawn a vehicle", "user", function(source, args, playerData)
-	local veh = args[1]
-	local ped = GetPlayerPed(source)
-	local coords = GetEntityCoords(ped)
-	local heading = GetEntityHeading(ped)
-	Adame.SpawnVehicle(veh, coords, heading, function(veh)
-		TaskWarpPedIntoVehicle(ped, veh, -1)
-	end)
-end, {}, false)
+--- Remove commands in future
+Adame.RegisterCommand('save', 'Save player', 'user', function(player, args)
+  player:savePlayer()
+end, {}, {})
 
-Adame.RegisterCommand("setgroup", "Set player group", "owner", function(args)
-	local id = tonumber(args[1])
-	local group = args[2]
-	if not id or not group then
-		error("Missing an id to set the group (Use setgroup + id + group)")
-	end
-	local player = Adame.GetPlayer(id)
-	player.setGroup(group)
-end, {}, true)
+--- User EndTextCommandScaleformString
 
-Adame.RegisterCommand("dv", "Delete a vehicle", "user", function(source, args)
-	local ped = GetPlayerPed(source)
-	local coords = GetEntityCoords(ped)
+Adame.RegisterCommand('id', 'Shows ID', 'user', function(player)
+  print(player.source)
+end)
 
-	TriggerClientEvent("adame:client:deleteVehicle", source)
-end, {
-	{ "number-distance" },
-	{ name = "dist", help = "Distance to remove (default: 1.0)" },
-}, false)
+--- Support commands
 
-Adame.RegisterCommand("register", "Register a new character", "user", function(source, args, playerData)
-	local data
+Adame.RegisterCommand('car', 'Spawn a vehicle', 'user', function(player, args)
+  local vehicle = args.model
+  local ped = GetPlayerPed(player.source)
+  local coords, heading = GetEntityCoords(ped), GetEntityHeading(ped)
 
-	Adame.Database.findOne(true, "users", { license = license }, function(success, result)
-		if #result > 0 then
-			if type(result[1].char_name) ~= "table" then
-				TriggerClientEvent("adame-identity:showRegisterIdentity", source)
-			else
-				print("Already registered.")
-			end
-		else
-			print("No user.")
-		end
-	end)
-end, {}, false)
+  if not ped or ped <= 0 then
+    return
+  end
 
--- ESX.RegisterCommand("char", "user", function(xPlayer, args, showError)
--- 	getIdentity(xPlayer.source, function(data)
--- 		if data.firstname == "" then
--- 			xPlayer.showNotification(_U("not_registered"))
--- 		else
--- 			xPlayer.showNotification(_U("active_character", data.firstname, data.lastname))
--- 		end
--- 	end)
--- end, false, { help = _U("show_active_character") })
+  Adame.SpawnVehicle(vehicle, coords, heading, function(vehicle)
+    TaskWarpPedIntoVehicle(ped, vehicle, -1)
+  end)
+end, { 'string-model' }, {
+  { name = 'model', help = 'Vehicle name' },
+})
 
--- ESX.RegisterCommand("chardel", "user", function(xPlayer, args, showError)
--- 	getIdentity(xPlayer.source, function(data)
--- 		if data.firstname == "" then
--- 			xPlayer.showNotification(_U("not_registered"))
--- 		else
--- 			deleteIdentity(xPlayer.source)
--- 			xPlayer.showNotification(_U("deleted_character"))
--- 			TriggerClientEvent("esx_identity:showRegisterIdentity", xPlayer.source)
--- 		end
--- 	end)
--- end, false, { help = _U("delete_character") })
+Adame.RegisterCommand('dv', 'Delete vehicle', 'user', function(player, args)
+  TriggerClientEvent('adame:client:deleteVehicle', player.source)
+end, {}, {})
+
+--- Moderator commands
+
+--- Admin commands
+
+--- Owner commands
+
+Adame.RegisterCommand('setgroup', 'Set player group', 'user', function(player, args)
+  player:setGroup(args.group)
+end, { 'number-target', 'string-group' }, {
+  { name = 'playerId', help = 'Player id' },
+  { name = 'group', help = 'Group to set' },
+})

@@ -13,7 +13,7 @@ Server = {
     ['support'] = 2,
     ['moderator'] = 3,
     ['admin'] = 4,
-    ['owner'] = 3,
+    ['owner'] = 5,
   },
   Spawn = {
     coords = vector4(-269.1, -956.22, 31.22, 208),
