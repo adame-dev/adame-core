@@ -26,8 +26,6 @@ local function createUser(src, license, name, exists, data)
       char_height = 170,
     })
 
-    print('[Adame] Created user: ' .. license)
-
     Adame.Players[src] = Adame.newPlayer(src, license, {
       name = name,
       jobs = {},
@@ -36,12 +34,14 @@ local function createUser(src, license, name, exists, data)
       inventory = {},
       status = Server.Status,
       appearance = {},
-      char_data = Server.Spawn.coords,
+      char_data = { coords = Server.Spawn.coords },
       char_name = '',
       char_sex = 'm',
       char_date = '01/01/1999',
       char_height = 170,
     })
+    print('[adame-core] Registered new user: ' .. name .. '[' .. src .. '] - ' .. license)
+    -- TODO: Create discord log for register
   else
     Adame.Players[src] = Adame.newPlayer(src, license, {
       name = name,
@@ -57,7 +57,7 @@ local function createUser(src, license, name, exists, data)
       char_date = data.char_date,
       char_height = data.char_height,
     })
-    TriggerClientEvent('adame:client:spawnPlayer', src, decode(data.char_data).coords)
+    print('[adame-core] Loaded user: ' .. name .. '[' .. src .. '] - ' .. license)
   end
 end
 

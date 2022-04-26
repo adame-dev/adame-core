@@ -56,7 +56,24 @@ function playerJoined(playerId)
   end
 
   print('[Adame] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' connected.')
+  -- TODO: Create discord log when user connect
+
   -- Start identity menu
+end
+
+function playerExit()
+  local playerId = source
+  local player = Adame.Players[playerId]
+  local license = Adame.GetLicense(playerId)
+  local name = player:getName()
+
+  if player then
+    player:savePlayer()
+    Adame.Players[playerId] = nil
+    print('[Adame] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' disconnected.')
+    -- TODO: Create discord log when user disconnect
+  end
+  DropPlayer(playerId, '[Adame] Left the server')
 end
 
 AddEventHandler('playerConnecting', function(_, _, deferrals)
@@ -72,20 +89,6 @@ AddEventHandler('playerConnecting', function(_, _, deferrals)
   end
   deferrals.done()
 end)
-
-function playerExit()
-  local playerId = source
-  local player = Adame.Players[playerId]
-  local license = Adame.GetLicense(playerId)
-  local name = player:getName()
-
-  if player then
-    player:savePlayer()
-    Adame.Players[playerId] = nil
-    print('[Adame] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' disconnected.')
-  end
-  DropPlayer(playerId, '[Adame] Left the server')
-end
 
 AddEventHandler('playerDropped', function()
   playerExit()
