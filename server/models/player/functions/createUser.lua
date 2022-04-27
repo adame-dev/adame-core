@@ -44,7 +44,6 @@ local function createUser(src, license, name, exists, data)
 
     TriggerClientEvent('adame-identity:identityCheck', src, false)
     TriggerClientEvent('adame-identity:showRegisterIdentity', src)
-    TriggerEvent('adame:server:firstSpawn', src)
 
     -- TODO: Create discord log for register
   else

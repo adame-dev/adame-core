@@ -65,7 +65,13 @@ RegisterNUICallback('register', function(data, cb)
   if reason == '' then
     TriggerServerEvent('adame-identity:setIdentity', data, myIdentifiers)
     EnableGui(false)
+    print('asdmkoasdjnoasd')
+
+    print(Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
+    SetEntityCoords(PlayerPedId(), Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
+    SetEntityHeading(PlayerPedId(), Server.Spawn.coords.w)
     Wait(500)
+
     -- TriggerEvent('esx_skin:openSaveableMenu', myIdentifiers.id)
   else
     print(reason)

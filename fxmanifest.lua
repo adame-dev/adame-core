@@ -26,6 +26,7 @@ server_scripts({
 
   'identity/server/main.lua',
 
+  'config/client.lua',
   'config/server.lua',
 })
 
@@ -44,6 +45,7 @@ client_scripts({
   'identity/client/main.lua',
 
   'config/client.lua',
+  'config/server.lua',
 })
 
 files({

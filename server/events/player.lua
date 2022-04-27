@@ -76,6 +76,17 @@ function playerExit()
   DropPlayer(playerId, '[Adame] Left the server')
 end
 
+
+function firstSpawn(source)
+  local playerId <const> = source
+  local license = Adame.GetLicense(playerId)
+
+  print(Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
+  SetEntityCoords(GetPlayerPed(playerId), Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
+  SetEntityHeading(GetPlayerPed(playerId), Server.Spawn.coords.w)
+end
+
+
 AddEventHandler('playerConnecting', function(_, _, deferrals)
   deferrals.defer()
   local playerId = source
@@ -95,14 +106,7 @@ AddEventHandler('playerDropped', function()
 end)
 
 
-function firstSpawn()
-  local playerId <const> = source
-  local license = Adame.GetLicense(playerId)
-
-  SetEntityCoords(GetPlayerPed(playerId), Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
-  SetEntityHeading(GetPlayerPed(playerId), Server.Spawn.coords.w)
-end
 
 RegisterNetEvent('adame:server:createPlayer', createPlayer)
 RegisterNetEvent('adame:server:playerJoined', playerJoined)
-RegisterNetEvent('adame:server:firstSpawn', playerExit)
+RegisterNetEvent('adame:server:firstSpawn', firstSpawn)
