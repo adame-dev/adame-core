@@ -70,6 +70,8 @@ local function createUser(src, license, name, exists, data)
     else
       TriggerClientEvent('adame-identity:identityCheck', src, true)
       TriggerEvent('adame-identity:characterUpdated', src, data)
+
+      -- TODO: Spawn system
     end
     print('[adame-core] Loaded user: ' .. name .. '[' .. src .. '] - ' .. license)
   end

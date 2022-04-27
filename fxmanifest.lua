@@ -7,45 +7,51 @@ name('adame-core')
 author('Adame Developing')
 
 server_scripts({
-  'server/main.lua',
-  'server/loops.lua',
+  'core/server/main.lua',
+  'core/server/loops.lua',
 
-  'server/models/player/player.lua',
-  'server/models/player/functions/createUser.lua',
-  'server/models/player/functions/deleteUser.lua',
+  'core/server/models/player/player.lua',
+  'core/server/models/player/functions/createUser.lua',
+  'core/server/models/player/functions/deleteUser.lua',
 
-  'server/functions/functions.lua',
-  'server/functions/database/database.lua',
-  'server/functions/callbacks.lua',
+  'core/server/functions/functions.lua',
+  'core/server/functions/database/database.lua',
+  'core/server/functions/callbacks.lua',
 
-  'server/events/player.lua',
+  'core/server/events/player.lua',
 
-  'server/commands/commands.lua',
+  'core/server/commands/commands.lua',
 
-  'server/export.lua',
+  'core/server/export.lua',
 
   'identity/server/main.lua',
 
-  'config/client.lua',
-  'config/server.lua',
+  'core/config/client.lua',
+  'core/config/server.lua',
 })
 
 client_scripts({
-  'client/main.lua',
-  'client/loops.lua',
+  'core/client/main.lua',
+  'core/client/loops.lua',
 
-  'client/identity/main.lua',
-  'client/events/spawnPlayer.lua',
-  'client/events/vehicle.lua',
+  'core/client/identity/main.lua',
+  'core/client/events/spawnPlayer.lua',
+  'core/client/events/vehicle.lua',
 
-  'client/functions/callbacks.lua',
+  'core/client/small/anims/handsup.lua',
+  'core/client/small/weapons/weapdrop.lua',
+  'core/client/small/density.lua',
+  'core/client/small/discord.lua',
+  'core/client/small/removeentities.lua',
 
-  'client/export.lua',
+  'core/client/functions/callbacks.lua',
+
+  'core/client/export.lua',
 
   'identity/client/main.lua',
 
-  'config/client.lua',
-  'config/server.lua',
+  'core/config/client.lua',
+  'core/config/server.lua',
 })
 
 files({

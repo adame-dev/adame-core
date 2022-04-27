@@ -15,7 +15,7 @@ local function playerExist(license)
   return result
 end
 
-local function playerData(license)
+function playerData(license)
   local result
 
   Adame.Database.findOne(true, 'users', { license = license }, function(success, data)
