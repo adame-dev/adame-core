@@ -62,7 +62,8 @@ local function createUser(src, license, name, exists, data)
       char_height = data.char_height,
     })
 
-    if data.date == '01-01-1900' then
+    print(data.char_date)
+    if data.char_date == '01-01-1900' then
       -- If char not exist
       TriggerClientEvent('adame-identity:identityCheck', src, false)
       TriggerClientEvent('adame-identity:showRegisterIdentity', src)
