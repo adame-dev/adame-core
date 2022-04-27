@@ -41,6 +41,8 @@ local function createUser(src, license, name, exists, data)
       char_height = 170,
     })
     print('[adame-core] Registered new user: ' .. name .. '[' .. src .. '] - ' .. license)
+    local player = Adame.Players[src]
+    player:savePlayer()
     -- TODO: Create discord log for register
   else
     Adame.Players[src] = Adame.newPlayer(src, license, {

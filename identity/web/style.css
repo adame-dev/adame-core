@@ -1,0 +1,230 @@
+    /* color palette from <https://github.com/vuejs/theme> */
+    @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+
+    :root {
+    --primary-color: #000;
+    color: white;
+    font-size: 1vh;
+    }
+
+    * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    }
+
+    html, body {
+    height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        display: none;
+        overflow: hidden;
+    }
+
+
+        ::-webkit-scrollbar {
+            width: 0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #000;
+            border-radius: 25px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        input {
+            width: 94%;
+            padding: 10px;
+            text-align: left;
+            color: #fff;
+        }
+
+        ::placeholder {
+            color: #fff;
+            opacity: .5;
+        }
+
+        button {
+            display: block;
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #373737;
+            border: 2px solid #444;
+            color: #fff;
+            width: 100%;
+        }
+
+        :focus {
+            outline: 0;
+        }
+
+        .register {
+            position: absolute;
+            width: 330px;
+            padding: 20px;
+            background: #1f1f1f;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #00000069;
+            left: 40%;
+            top: 20%;
+        }
+
+        .register .main {
+            display: block;
+            padding: 0 15px;
+        }
+
+        .register .main .form-title {
+            font-weight: normal !important;
+            text-align: center;
+            display: block;
+            font-size: 10px;
+            font-weight: 200;
+        }
+
+        .register .main .form-group {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: flex-start;
+            flex-direction: column;
+        }
+
+        .register .main .form-group .checkbox label {
+            margin: 0;
+            color: #fff !important;
+        }
+
+        .register .main .form-group label {
+            display: block;
+            font-size: 16px;
+            margin: 0 0 10px 0;
+            padding: 0 10px;
+            font-weight: 200;
+        }
+
+        .register .main .form-group:not(:last-child) label {
+            margin: 10px 0;
+        }
+
+        .register .main .form-group input {
+            background: #101010;
+            color: #fff;
+            border: 0;
+            padding: 12px 10px;
+            border-radius: 7px;
+            border: 1px solid transparent;
+            box-shadow: 0 0 20px #00000069;
+            transition: all .3s ease;
+        }
+        
+        .register .main .form-group input:focus {
+            border: 1px solid #707070;
+        }
+
+        .register .main .form-group input.hover {
+            border: 1px solid #707070;
+        }
+
+        .register .main .form-group label[for="man"],
+        .register .main .form-group label[for="woman"] {
+            transition: all .3s ease;
+            padding: 0 0 0 30px;
+        }
+
+        .register .main .form-group [type="radio"]:checked,
+        .register .main .form-group [type="radio"]:not(:checked) {
+            position: absolute;
+            left: -9999px;
+        }
+
+            
+        .register .main .form-group [type="radio"]:checked + label,
+        .register .main .form-group [type="radio"]:not(:checked) + label {
+            position: relative;
+            padding-left: 28px;
+            cursor: pointer;
+            line-height: 17px;
+            display: inline-block;
+            color: #666;
+        }
+
+        .register .main .form-group [type="radio"]:checked + label:before,
+        .register .main .form-group [type="radio"]:not(:checked) + label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border: 1px solid transparent;
+            border-radius: 100%;
+            background: #101010;
+        }
+
+        .register .main .form-group [type="radio"]:checked + label:before {
+            border: 1px solid #707070;
+        }
+
+        .register .main .form-group [type="radio"]:checked + label:after,
+        .register .main .form-group [type="radio"]:not(:checked) + label:after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            border-radius: 100%;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+        }
+
+        .register .main .form-group [type="radio"]:not(:checked) + label:after {
+            opacity: 0;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+
+        .register .main .form-group [type="radio"]:checked + label:after {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        .register .main button {
+            text-align: center;
+            padding: 0 30px;
+            background: #000;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+
+        }
+
+        .register .main button:hover {
+            transform: translateY(-5%);
+        }
+
+
+        .register .main button {
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .register .main button .text {
+            line-height: 40px;
+            font-size: 15px;
+        }

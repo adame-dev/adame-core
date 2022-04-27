@@ -59,7 +59,14 @@ function playerJoined(playerId)
   createPlayer()
 
   -- TODO: Create discord log when user connect
-  -- TODO: Start identity menu
+  local data = getIdentity(playerId)
+  if data.firstname == '' then
+    TriggerClientEvent('adame-identity:identityCheck', playerId, false)
+    TriggerClientEvent('adame-identity:showRegisterIdentity', playerId)
+  else
+    TriggerClientEvent('adame-identity:identityCheck', playerId, true)
+    TriggerEvent('adame-identity:characterUpdated', playerId, data)
+  end
 end
 
 function playerExit()

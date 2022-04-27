@@ -24,6 +24,9 @@ server_scripts({
   'server/commands/commands.lua',
 
   'server/export.lua',
+
+  'identity/server/main.lua',
+
   'config/server.lua',
 })
 
@@ -39,13 +42,20 @@ client_scripts({
 
   'client/export.lua',
 
+  'identity/client/main.lua',
+
   'config/client.lua',
 })
 
 files({
   -- Import file
   'import.lua',
+  'identity/web/index.html',
+  'identity/web/script.js',
+  'identity/web/style.css',
 })
+
+ui_page('identity/web/index.html')
 
 dependencies({
   '/onesync',
