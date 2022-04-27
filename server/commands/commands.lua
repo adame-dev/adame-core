@@ -3,7 +3,7 @@ Adame.RegisterCommand('save', 'Save player', 'user', function(player, args)
   player:savePlayer()
 end, {}, {})
 
---- User EndTextCommandScaleformString
+--- User
 
 Adame.RegisterCommand('id', 'Shows ID', 'user', function(player)
   print(player.source)
