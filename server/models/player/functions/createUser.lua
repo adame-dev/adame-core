@@ -20,9 +20,9 @@ local function createUser(src, license, name, exists, data)
       identity = encode({}),
       job_data = encode({}),
       char_data = encode({ coords = Server.Spawn.coords }),
-      char_name = '',
+      char_name = encode({ firstname = 'Andrés', lastname = 'Velasco' }),
       char_sex = 'm',
-      char_date = '01/01/1999',
+      char_date = '01-01-1900',
       char_height = 170,
     })
 
@@ -35,14 +35,17 @@ local function createUser(src, license, name, exists, data)
       status = Server.Status,
       appearance = {},
       char_data = { coords = Server.Spawn.coords },
-      char_name = '',
+      char_name = { firstname = 'Andrés', lastname = 'Velasco' },
       char_sex = 'm',
-      char_date = '01/01/1999',
+      char_date = '01-01-1900',
       char_height = 170,
     })
     print('[adame-core] Registered new user: ' .. name .. '[' .. src .. '] - ' .. license)
-    local player = Adame.Players[src]
-    player:savePlayer()
+
+    TriggerClientEvent('adame-identity:identityCheck', src, false)
+    TriggerClientEvent('adame-identity:showRegisterIdentity', src)
+    TriggerEvent('adame:server:firstSpawn', src)
+
     -- TODO: Create discord log for register
   else
     Adame.Players[src] = Adame.newPlayer(src, license, {
@@ -59,6 +62,15 @@ local function createUser(src, license, name, exists, data)
       char_date = data.char_date,
       char_height = data.char_height,
     })
+
+    if data.date == '01-01-1900' then
+      -- If char not exist
+      TriggerClientEvent('adame-identity:identityCheck', src, false)
+      TriggerClientEvent('adame-identity:showRegisterIdentity', src)
+    else
+      TriggerClientEvent('adame-identity:identityCheck', src, true)
+      TriggerEvent('adame-identity:characterUpdated', src, data)
+    end
     print('[adame-core] Loaded user: ' .. name .. '[' .. src .. '] - ' .. license)
   end
 end

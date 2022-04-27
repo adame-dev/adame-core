@@ -47,33 +47,25 @@ end
 
 function playerJoined(playerId)
   local playerId = source or playerId
-  local player = Adame.Players[playerId]
   local license = Adame.GetLicense(playerId)
   local name = GetPlayerName(playerId)
 
-  if player then
+  if Adame.Players[playerId] then
     return DropPlayer(playerId, '[adame-core] Player with same identifier is already logged in.')
   end
 
   print('[adame-core] Player ' .. name .. '[' .. playerId .. ']: ' .. license .. ' connected.')
+
   createPlayer()
 
   -- TODO: Create discord log when user connect
-  local data = getIdentity(playerId)
-  if data.firstname == '' then
-    TriggerClientEvent('adame-identity:identityCheck', playerId, false)
-    TriggerClientEvent('adame-identity:showRegisterIdentity', playerId)
-  else
-    TriggerClientEvent('adame-identity:identityCheck', playerId, true)
-    TriggerEvent('adame-identity:characterUpdated', playerId, data)
-  end
 end
 
 function playerExit()
   local playerId = source
   local player = Adame.Players[playerId]
   local license = Adame.GetLicense(playerId)
-  local name = player:getName()
+  local name = GetPlayerName(playerId)
 
   if player then
     player:savePlayer()
@@ -102,6 +94,15 @@ AddEventHandler('playerDropped', function()
   playerExit()
 end)
 
+
+function firstSpawn()
+  local playerId <const> = source
+  local license = Adame.GetLicense(playerId)
+
+  SetEntityCoords(GetPlayerPed(playerId), Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
+  SetEntityHeading(GetPlayerPed(playerId), Server.Spawn.coords.w)
+end
+
 RegisterNetEvent('adame:server:createPlayer', createPlayer)
 RegisterNetEvent('adame:server:playerJoined', playerJoined)
-RegisterNetEvent('adame:server:playerExit', playerExit)
+RegisterNetEvent('adame:server:firstSpawn', playerExit)

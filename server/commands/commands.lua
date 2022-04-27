@@ -9,6 +9,10 @@ Adame.RegisterCommand('id', 'Shows ID', 'user', function(player)
   print(player.source)
 end)
 
+Adame.RegisterCommand('tp', 'asd', 'user', function(player)
+  TriggerEvent('adame:server:firstSpawn', player.source)
+end)
+
 --- Support commands
 
 Adame.RegisterCommand('car', 'Spawn a vehicle', 'user', function(player, args)

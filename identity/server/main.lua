@@ -1,3 +1,5 @@
+local encode = json.encode
+
 function getIdentity(source, callback)
   local player = Adame.GetPlayer(source)
   local license = Adame.GetLicense(source)
@@ -12,9 +14,8 @@ function getIdentity(source, callback)
 
     if #data > 0 then
       result = data[1]
-      if result.char_name ~= '' then
+      if result.char_date ~= '01-01-1900' then
         char_data = {
-          identifier = result[1].license,
           firstname = result[1].char_name.firstname,
           lastname = result[1].char_name.lastname,
           dateofbirth = result[1].char_date,
@@ -23,7 +24,6 @@ function getIdentity(source, callback)
         }
       else
         char_data = {
-          identifier = '',
           firstname = '',
           lastname = '',
           dateofbirth = '',
@@ -43,14 +43,13 @@ function setIdentity(identifier, data, callback)
 
   Adame.Database.updateOne(true, 'users', { license = license }, {
     ['$set'] = {
-      char_name = { firstname = data.firstname, lastname = data.lastname },
+      char_name = encode({ firstname = data.firstname, lastname = data.lastname }),
       char_date = data.dateofbirth,
       char_sex = data.sex,
       char_height = data.height,
     },
   })
 
-  player:savePlayer()
   return true
 end
 
@@ -77,7 +76,7 @@ function deleteIdentity(source)
 
   Adame.Database.updateOne(true, 'users', { license = license }, {
     ['$set'] = {
-      char_name = '',
+      char_name = { firstname = '', lastname = '' },
       char_date = '',
       char_sex = '',
       char_height = '',

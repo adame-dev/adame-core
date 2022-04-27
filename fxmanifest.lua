@@ -13,7 +13,6 @@ server_scripts({
   'server/models/player/player.lua',
   'server/models/player/functions/createUser.lua',
   'server/models/player/functions/deleteUser.lua',
-  'server/models/player/functions/createCharacter.lua',
 
   'server/functions/functions.lua',
   'server/functions/database/database.lua',

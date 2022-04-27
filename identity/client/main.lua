@@ -65,7 +65,7 @@ RegisterNUICallback('register', function(data, cb)
   if reason == '' then
     TriggerServerEvent('adame-identity:setIdentity', data, myIdentifiers)
     EnableGui(false)
-    Citizen.Wait(500)
+    Wait(500)
     -- TriggerEvent('esx_skin:openSaveableMenu', myIdentifiers.id)
   else
     print(reason)
