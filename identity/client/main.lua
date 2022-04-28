@@ -65,7 +65,6 @@ RegisterNUICallback('register', function(data, cb)
   if reason == '' then
     TriggerServerEvent('adame-identity:setIdentity', data, myIdentifiers)
     EnableGui(false)
-    print('asdmkoasdjnoasd')
 
     print(Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
     SetEntityCoords(PlayerPedId(), Server.Spawn.coords.x, Server.Spawn.coords.y, Server.Spawn.coords.z)
@@ -146,6 +145,5 @@ end
 RegisterNetEvent('adame-identity:showRegisterIdentity', showRegisterIdentity)
 
 RegisterCommand('register', function()
-  print('asd')
   TriggerEvent('adame-identity:showRegisterIdentity', source)
 end)

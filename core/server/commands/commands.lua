@@ -1,3 +1,5 @@
+-- TODO: Finish all commands
+
 --- Remove commands in future
 Adame.RegisterCommand('save', 'Save player', 'user', function(player, args)
   player:savePlayer()

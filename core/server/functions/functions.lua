@@ -140,3 +140,37 @@ Adame.SpawnVehicle = function(model, coords, heading, cb)
   local vehicle = CreateVehicle(hash, coords.x, coords.y, coords.z, heading, true, false)
   return cb(vehicle)
 end
+
+Adame.PlayerExist = function(license)
+  local result = false
+
+  Adame.Database.findOne(true, 'users', { license = license }, function(success, data)
+    if not success then
+      print('No user.')
+      return
+    end
+
+    if #data > 0 then
+      result = true
+    end
+  end)
+
+  return result
+end
+
+Adame.PlayerData = function(license)
+  local result
+
+  Adame.Database.findOne(true, 'users', { license = license }, function(success, data)
+    if not success then
+      print('No user.')
+      return
+    end
+
+    if #data > 0 then
+      result = data[1]
+    end
+  end)
+
+  return result
+end
