@@ -66,6 +66,10 @@ local function createUser(src, license, name, exists, data)
       -- If char not exist
       TriggerClientEvent('adame-identity:identityCheck', src, false)
       TriggerClientEvent('adame-identity:showRegisterIdentity', src)
+      -- TODO: Player invincible
+      -- TODO: ThefeedHideThisFrame()
+      -- TODO: HideHudAndRadarThisFrame()
+      -- TODO: SetLocalPlayerInvisibleLocally(true)
     else
       TriggerClientEvent('adame-identity:identityCheck', src, true)
       TriggerEvent('adame-identity:characterUpdated', src, data)

@@ -14,6 +14,10 @@ CreateThread(function()
   while true do
     SetEveryoneIgnorePlayer(PlayerPedId(), true)
 
+		SetMaxWantedLevel(0)
+		NetworkSetFriendlyFireOption(true)
+		SetPlayerInvincible(PlayerId(), false)
+    
     HideHudComponentThisFrame(1) -- 1 : WANTED_STARS
     HideHudComponentThisFrame(3) -- 3 : CASH
     HideHudComponentThisFrame(4) -- 4 : MP_CASH
